@@ -15,3 +15,16 @@ test('GET /users', function (t) {
       t.end()
     })
 })
+
+test('POST /users', function (t) {
+  request(app)
+    .post('/users')
+    .send({test: 'test'})
+    .expect(200)
+    .end(function (err, res) {
+      t.error(err, 'No error')
+      t.equals(res.statusCode, 200, 'Status code is 200')
+      t.deepEqual(res.body, {message: 'OK'}, 'Response data is correct');
+      t.end()
+    })
+})
